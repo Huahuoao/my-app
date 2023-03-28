@@ -28,7 +28,7 @@
 import {ref,reactive} from "vue";
 import { message } from 'ant-design-vue';
 import { defineComponent } from 'vue';
-let logo = ref(true)
+let logo = ref(false)
 let user = reactive({
   username:"",
   password:""
