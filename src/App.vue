@@ -1,49 +1,61 @@
 <template>
-  <div class="content">
-  <div class="logo">
-    <div v-if="!logo">
-      <img src="./assets/img/sleep-text.png" class="sleep-text"/>
-      <img @click="clickLogo" src="./assets/img/sleep.png" class="tp" >
-    </div>
-    <div v-else @click="clickLogo">
-      <img src="./assets/img/awake-text.png" class="awake-text"/>
-      <img src="./assets/img/awake.png" class="tp">
-
-    </div>
-    <div v-if="logo">
-      <div class="login-input" >
-        <a-input v-model:value="user.username" placeholder="点击这里输入账号" class="username"  />
-        <a-input v-model:value="user.password" placeholder="点击这里输入密码" class="password" type="password" />
+  <Hover :hover="hover"/>
+  <div class="all">
+    <div class="logo">
+      <div v-if="!logo" class="logo-false">
+        <img src="./assets/img/sleep-text.png" class="sleep-text"/>
+        <img @click="clickLogo" src="./assets/img/sleep.png" class="tp" width="150">
       </div>
-      <div class="button">
-        <a-button class="login-button" @click="success">登录</a-button>
-        <a-button class="register-button">注册</a-button>
+      <div v-else @click="clickLogo" class="logo-false">
+        <img src="./assets/img/awake-text.png" class="awake-text"/>
+        <img src="./assets/img/awake.png" class="tp" width="150">
       </div>
     </div>
-  </div>
+    <div class="content">
+      <div v-if="logo">
+        <div class="login-input">
+          <a-input v-model:value="user.username" placeholder="点击这里输入账号" class="username"/>
+          <a-input v-model:value="user.password" placeholder="点击这里输入密码" class="password" type="password"/>
+        </div>
+        <div class="button">
+          <a-button class="login-button" @click="success">登录</a-button>
+          <a-button class="register-button">注册</a-button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref,reactive} from "vue";
-import { message } from 'ant-design-vue';
-import { defineComponent } from 'vue';
+import {ref, reactive} from "vue";
+import {message} from 'ant-design-vue';
+import {defineComponent} from 'vue';
+import Hover from './components/Hover.vue'
+
+let hover = ref(false)
 let logo = ref(false)
 let user = reactive({
-  username:"",
-  password:""
+  username: "",
+  password: ""
 })
-function clickLogo(){
-  logo.value=!logo.value
+
+function clickLogo() {
+  logo.value = !logo.value
   console.log(logo)
 }
+
 const success = () => {
+  hover.value = true
   message
       .loading('登陆中', 1.3)
       .then(
-          () => message.success('登录成功', 1.3),
+          () => {
+            message.success('登录成功', 1.3);
+            hover.value = false;
+          },
           // eslint-disable-next-line @typescript-eslint/no-empty-function
-          () => {},
+          () => {
+          },
       )
   ;
 };
@@ -51,58 +63,77 @@ const success = () => {
 
 </script>
 <style scoped>
-.content{
-  width: 520px;
+
+.content {
+  display: flex;
+  flex-direction: column;
 }
-.tp{
-  position:relative;
-  top:-180px;
-  max-height: 180px;
+
+.all {
+  padding-top: 5%;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(122deg, #ff6e7f, #bfe9ff)
 }
-.sleep-text{
-  max-height: 50px;
-  position: relative;
-  top: -220px;
+
+.sleep-text {
+  max-height: 35px;
 }
-.password{
-  position: relative;
+
+.logo-false {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 30%;
+  margin-bottom: 3%;
+}
+
+.password {
+  margin: 10%;
   border: red solid 2px;
-  top: 30px;
   border-radius: 15px;
   width: 280px;
 }
-.username{
+
+.username {
   border: red solid 2px;
   border-radius: 15px;
   width: 280px;
 }
-.login-input{
-  position: relative;
-  top: -150px
+
+.login-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.button{
-  position: relative;
-  top: -80px;
+
+.button {
+  display: flex;
+  justify-content: space-evenly;
 }
-.login-button{
-  position: relative;
-  left: -20px;
+
+.login-button {
   height: 50px;
   width: 100px;
   background-color: hotpink;
   border-radius: 50px;
 }
-.register-button{
-  position: relative;
-  right: -20px;
+
+.register-button {
   border-radius: 50px;
   height: 50px;
   width: 100px;
   background-color: hotpink;
 }
-.awake-text{
-  position: relative;
-  top: -130px;
+
+
+.awake-text {
   max-height: 60px;
 }
 </style>
