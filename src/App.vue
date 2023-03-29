@@ -14,8 +14,8 @@
     <div class="content">
       <div v-if="logo">
         <div class="login-input">
-          <a-input v-model:value="user.username" placeholder="点击这里输入账号" class="username"/>
-          <a-input v-model:value="user.password" placeholder="点击这里输入密码" class="password" type="password"/>
+          <input v-model.trim="user.username" placeholder=" 请输入账号" class="username"  />
+          <input v-model.trim="user.password" placeholder=" 请输入密码" class="password" type="password"/>
         </div>
         <div class="button">
           <a-button class="login-button" @click="success">登录</a-button>
@@ -31,7 +31,8 @@ import {ref, reactive} from "vue";
 import {message} from 'ant-design-vue';
 import {defineComponent} from 'vue';
 import Hover from './components/Hover.vue'
-
+import axios from "axios";
+import {login} from './api/index'
 let hover = ref(false)
 let logo = ref(false)
 let user = reactive({
@@ -39,19 +40,30 @@ let user = reactive({
   password: ""
 })
 
+
 function clickLogo() {
   logo.value = !logo.value
   console.log(logo)
 }
 
+
+
+
 const success = () => {
   hover.value = true
   message
-      .loading('登陆中', 1.3)
+      .loading('登陆中', 1)
       .then(
           () => {
-            message.success('登录成功', 1.3);
-            hover.value = false;
+            login(user).then(res=>{
+              if(res.code==200)
+                message.success("登录成功");
+              if(res.code==301)
+                message.warn("用户未注册")
+              if(res.code == 302)
+                message.warn("密码错误")
+            })
+              hover.value = false;
           },
           // eslint-disable-next-line @typescript-eslint/no-empty-function
           () => {
@@ -76,7 +88,6 @@ const success = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(122deg, #ff6e7f, #bfe9ff)
 }
 
 .sleep-text {
