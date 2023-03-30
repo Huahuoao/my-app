@@ -42,7 +42,6 @@ let b = (num:number)=>{
 
 <style scoped>
 .app{
-
   display: flex;
   flex-direction: column;
   align-items: center;
