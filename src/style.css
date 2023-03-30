@@ -7,7 +7,21 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+@font-face{
+  font-family: myFont;
+  src:url(./assets/fonts/FZLanTYK.ttf);
 
+}
+img{
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+}
+*{
+  font-family: myFont;
+  font-size: large;
+}
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
