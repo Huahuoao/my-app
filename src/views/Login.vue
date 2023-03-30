@@ -2,7 +2,6 @@
 
   <Hover :hover="hover"/>
   <div class="all">
-    <a-button @click="go()"> 进入新页面</a-button>
     <div class="logo">
       <div v-if="!logo" class="logo-false">
         <img src="../assets/img/sleep-text.png" class="sleep-text"/>
@@ -19,6 +18,7 @@
           <input v-model.trim="user.username" placeholder=" 请输入账号" class="username"/>
           <input v-model.trim="user.password" placeholder=" 请输入密码" class="password" type="password"/>
         </div>
+        <router-link to="/home" class="yklogin">游客登录</router-link>
         <div class="button">
           <a-button class="login-button" @click="success">登录</a-button>
           <a-button class="register-button">注册</a-button>
@@ -89,7 +89,9 @@ const success = () => {
   display: flex;
   flex-direction: column;
 }
-
+.yklogin{
+  margin-left: 76%;
+}
 .all {
   padding-top: 5%;
   width: 100vw;
@@ -117,7 +119,7 @@ const success = () => {
 }
 
 .password {
-  margin: 10%;
+  margin-top: 10%;
   border: red solid 2px;
   border-radius: 15px;
   width: 280px;
