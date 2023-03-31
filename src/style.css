@@ -12,6 +12,11 @@
   src:url(./assets/fonts/FZLanTYK.ttf);
 
 }
+@font-face{
+  font-family: myFont-cu;
+  src:url(./assets/fonts/FZLanTYK_Cu.ttf);
+
+}
 img{
   max-height: 100%;
   max-width: 100%;

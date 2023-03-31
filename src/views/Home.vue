@@ -35,14 +35,14 @@
             <AppstoreOutlined/>
           </template>
           <template #title>计划</template>
-          <a-menu-item key="5">查看当日计划</a-menu-item>
-          <a-menu-item key="6">查看历史记录</a-menu-item>
+          <a-menu-item key="5"  @click="router.push('/plan/today')">查看当日计划</a-menu-item>
+          <a-menu-item key="6" @click="router.push('/plan/history')">查看历史记录</a-menu-item>
           <!--          <a-sub-menu key="sub3" title="Submenu">-->
           <!--            <a-menu-item key="7">Option 7</a-menu-item>-->
           <!--            <a-menu-item key="8">Option 8</a-menu-item>-->
           <!--          </a-sub-menu>-->
         </a-sub-menu>
-        <a-sub-menu key="sub4">
+        <a-sub-menu key="sub4" >
           <template #icon>
             <SettingOutlined/>
           </template>
@@ -135,6 +135,7 @@ let focusRecord = () =>{
   border: pink solid 5px;
   border-radius: 10px;
   height: 80vh;
+
 
 }
 

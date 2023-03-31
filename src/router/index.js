@@ -24,7 +24,15 @@ const routes = [
                     {
                         path: "/focus/record",
                         component:()=>import('../views/focus/record.vue')
-                    }
+                    },
+                    {
+                        path: "/plan/today",
+                        component:()=>import('../views/plan/today.vue')
+                    },
+                    {
+                        path: "/plan/history",
+                        component:()=>import('../views/plan/history.vue')
+                    },
                 ]
             },
 
