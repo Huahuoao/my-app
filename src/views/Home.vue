@@ -84,7 +84,6 @@ function getnowTime(nowTime:any):any{
   setInterval(()=>{
     let date = new Date();
     nowTime.value = date.toLocaleString();
-    console.log(nowTime.value)
     return nowTime.value
   },1000)
 }
@@ -132,8 +131,8 @@ let focusRecord = () =>{
 }
 
 .content {
-  border: pink solid 5px;
-  border-radius: 10px;
+  border: lightskyblue solid 5px;
+  border-radius: 5px;
   height: 80vh;
 
 

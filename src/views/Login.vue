@@ -66,7 +66,12 @@ const success = () => {
           () => {
             login(user).then(res => {
               if (res.code == 200)
-                message.success("登录成功");
+                {
+                  localStorage.setItem('id', res.data.userId);
+                  router.push('/home')
+                  message.success("登录成功");
+                }
+
               if (res.code == 301)
                 message.warn("用户未注册")
               if (res.code == 302)

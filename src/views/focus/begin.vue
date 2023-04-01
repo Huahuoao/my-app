@@ -1,4 +1,4 @@
-<template>
+`<template>
 <div class="app">
   <Countdown v-if="begin"
       class="countdown"

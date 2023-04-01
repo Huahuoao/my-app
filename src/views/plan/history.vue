@@ -1,5 +1,5 @@
 <template>
-history
+  history
 </template>
 
 <script lang="ts" setup>

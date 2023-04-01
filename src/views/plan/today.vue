@@ -6,20 +6,41 @@
         <p id="text2">{{ date }}</p>
       </div>
     </div>
-    <div class="content"></div>
+    <div class="content">
+      <Card ref="myref"></Card>
+      <div>
+        <br/> <br/> <br/> <br/>
+      </div>
+    </div>
     <div class="footer">
-      <a-input id="input" placeholder="添加任务"></a-input>
+      <a-input v-model:value="data" id="input" placeholder="添加任务" @keyup.enter="add()"></a-input>
     </div>
 
   </div>
+
 </template>
 
 <script lang="ts" setup>
-import {onMounted, ref} from "vue";
+import {onMounted, ref, reactive} from "vue";
+import Card from '../../components/PlanCard.vue'
+import {listPLan, addPLan} from '../../api/index'
 
+let data = ref('')
+const myref = ref()
+let add = () => {
+  if (data.value.trim() === '') return
+  myref.value.add(data.value)
+  data.value = ''
+}
+
+
+const result = ref('');
 onMounted(() => {
   formatDate(new Date());
-})
+  })
+
+
+
 let date = ref('');
 const formatDate = (time: any) => {
   // 格式化日期，获取今天的日期
@@ -54,27 +75,29 @@ const formatDate = (time: any) => {
   const year: number = Dates.getFullYear();
   const month: any = (Dates.getMonth() + 1) < 10 ? '0' + (Dates.getMonth() + 1) : (Dates.getMonth() + 1);
   const day: any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate();
-  date.value = year + '-' + month + '-' + day + "  "+"星期"+DayString;
+  date.value = year + '-' + month + '-' + day + "  " + "星期" + DayString;
 };
 </script>
 
 <style scoped>
-  input::placeholder{
+input::placeholder {
 
-    font-size: 2vh;
+  font-size: 2vh;
 }
-#input{
+
+#input {
+  border: lightgreen solid 2px;
   margin-top: 1.3vh;
-  width: 95%;
   height: 5.5vh;
-  border-radius: 12px;
+  border-radius: 5px;
 }
+
 #app {
+  overflow: scroll;
   background-color: white;
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100%;
 }
 
 .top-text {
@@ -94,24 +117,31 @@ const formatDate = (time: any) => {
 #text1 {
   font-size: 4vh;
   margin-bottom: 0;
-  font-family: "Microsoft Yaheis" ;
+  font-family: "Microsoft Yaheis";
 
 }
 
 #text2 {
-
   z-index: 50;
   font-size: 2vh;
 }
 
 .content {
-  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 78%;
 }
 
 .footer {
+  bottom: 100px;
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 80%;
+  margin-left: 5vw;
+
+
 }
 </style>
