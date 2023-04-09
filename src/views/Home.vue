@@ -1,6 +1,6 @@
 <template>
-  <div>
-  </div>
+  <div id="app">
+ 
   <a-layout>
     <a-layout-sider class="left">
       <div class="head-1">
@@ -37,6 +37,7 @@
           <template #title>计划</template>
           <a-menu-item key="5"  @click="router.push('/plan/today')">查看当日计划</a-menu-item>
           <a-menu-item key="6" @click="router.push('/plan/history')">查看历史记录</a-menu-item>
+          <a-menu-item key="7" @click="router.push('/plan/book')">计划簿</a-menu-item>
           <!--          <a-sub-menu key="sub3" title="Submenu">-->
           <!--            <a-menu-item key="7">Option 7</a-menu-item>-->
           <!--            <a-menu-item key="8">Option 8</a-menu-item>-->
@@ -70,6 +71,7 @@
       <a-layout-footer class="footer">Footer</a-layout-footer>
     </a-layout>
   </a-layout>
+</div>
 </template>
 
 <script lang="ts" setup>
@@ -121,6 +123,7 @@ let focusRecord = () =>{
 }
 
 .left {
+
   height: 100vh;
   background-color: #ffffff;
 }
@@ -131,10 +134,11 @@ let focusRecord = () =>{
 }
 
 .content {
-  border: lightskyblue solid 5px;
+  border: deepskyblue solid 1px;
   border-radius: 5px;
-  height: 80vh;
 
+  height: 80vh;
+  box-shadow: 10px 10px 5px #888888;
 
 }
 

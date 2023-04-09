@@ -37,8 +37,9 @@ import axios from "axios";
 import {login} from '../api'
 import {routerKey} from "vue-router";
 import {useRouter} from "vue-router";
-
+import { useUserStore } from '.././store/user'
 const router = useRouter();
+const userStore = useUserStore()
 let hover = ref(false)
 let logo = ref(false)
 let user = reactive({
@@ -47,9 +48,7 @@ let user = reactive({
 })
 let url1 = ref('/')
 let go = () => {
-
    router.push('/home')
-
 }
 
 function clickLogo() {
@@ -67,7 +66,8 @@ const success = () => {
             login(user).then(res => {
               if (res.code == 200)
                 {
-                  localStorage.setItem('id', res.data.userId);
+                  localStorage.setItem("id",res.data.id);
+                  userStore.updateId(res.data.id);
                   router.push('/home')
                   message.success("登录成功");
                 }

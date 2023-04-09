@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="all">
     <div class="top">
       <div class="top-text">
         <p id="text1">我的一天</p>
@@ -11,11 +11,13 @@
       <div>
         <br/> <br/> <br/> <br/>
       </div>
-    </div>
-    <div class="footer">
-      <a-input v-model:value="data" id="input" placeholder="添加任务" @keyup.enter="add()"></a-input>
+
     </div>
 
+    <div class="footer">
+      <a-input v-model:value="data" id="input" placeholder="添加任务" @keyup.enter="add()"
+               style="font-size: large;"></a-input>
+    </div>
   </div>
 
 </template>
@@ -25,6 +27,8 @@ import {onMounted, ref, reactive} from "vue";
 import Card from '../../components/PlanCard.vue'
 import {listPLan, addPLan} from '../../api/index'
 
+const today = new Date();
+const todayString = today.getFullYear() + '-' + (Number(today.getMonth()) + 1) + '-' + today.getDate();
 let data = ref('')
 const myref = ref()
 let add = () => {
@@ -37,8 +41,8 @@ let add = () => {
 const result = ref('');
 onMounted(() => {
   formatDate(new Date());
-  })
-
+  myref.value.flashData(todayString)
+})
 
 
 let date = ref('');
@@ -81,23 +85,24 @@ const formatDate = (time: any) => {
 
 <style scoped>
 input::placeholder {
-
   font-size: 2vh;
 }
 
 #input {
-  border: lightgreen solid 2px;
+  border:deepskyblue solid 2px;
   margin-top: 1.3vh;
   height: 5.5vh;
   border-radius: 5px;
 }
 
-#app {
+#all {
   overflow: scroll;
-  background-color: white;
+  background: url("../../assets/img/bg-cat.png") no-repeat beige;
+  background-size: 100% 100%;
   display: flex;
   flex-direction: column;
   height: 100%;
+
 }
 
 .top-text {
@@ -107,7 +112,6 @@ input::placeholder {
 }
 
 .top {
-
   height: 10vh;
   width: 100%;
   display: flex;
@@ -134,14 +138,9 @@ input::placeholder {
 }
 
 .footer {
-  bottom: 100px;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
+  bottom: 12%;
+  position: fixed;
+  width: calc(90% - 15em);
   margin-left: 5vw;
-
-
 }
 </style>

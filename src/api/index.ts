@@ -16,9 +16,51 @@ export function login(param: UserInfoParam) {
 }
 
 interface PlanDto {
+    id:number,
     userId:string | null | number,
     text:string,
     date:string
+}
+
+
+interface BookDto {
+
+    userId:string | null | number,
+    name:string
+
+}
+
+interface BookTwoDto {
+
+   id:number|string
+
+}
+interface BookTwoDto {
+
+    id:number|string
+
+}
+
+interface BookThreeDto {
+
+    id:number|string,
+    userId:number|string,
+    text:string;
+
+}
+export function listBook(param: BookDto) {
+    return request({
+        url: '/plan/list/book',
+        method: 'post',
+        data: param,
+    })
+}
+export function addBook(param: BookDto) {
+    return request({
+        url: '/plan/add/book',
+        method: 'post',
+        data: param,
+    })
 }
 // 获取用户信息
 export function addPLan(param: PlanDto) {
@@ -28,7 +70,27 @@ export function addPLan(param: PlanDto) {
         data: param,
     })
 }
-
+export function deleteBook(param: BookTwoDto) {
+    return request({
+        url: '/plan/delete/book',
+        method: 'post',
+        data: param,
+    })
+}
+export function addPlanByBook(param: BookThreeDto) {
+    return request({
+        url: '/plan/add/book/plan',
+        method: 'post',
+        data: param,
+    })
+}
+export function listBookPlan(param: BookTwoDto) {
+    return request({
+        url: '/plan/list/book/plan',
+        method: 'post',
+        data: param,
+    })
+}
 export function listPLan(param: PlanDto) {
     return request({
         url: '/plan/list',
@@ -37,3 +99,18 @@ export function listPLan(param: PlanDto) {
     })
 }
 
+export function deletePlan(param: PlanDto) {
+    return request({
+        url: '/plan/delete',
+        method: 'post',
+        data: param,
+    })
+}
+
+export function changePlan(param: PlanDto) {
+    return request({
+        url: '/plan/change',
+        method: 'post',
+        data: param,
+    })
+}

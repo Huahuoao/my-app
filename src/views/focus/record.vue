@@ -1,15 +1,18 @@
 <template>
-<div class="app">
-  记录页面
-</div>
+  <div class="app">
+    记录页面
+
+  </div>
 </template>
 
-<script>
+<script setup lang="ts">
+
 
 </script>
 
 <style scoped>
-.app{
+
+.app {
   display: flex;
   flex-direction: column;
   align-items: center;

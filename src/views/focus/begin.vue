@@ -1,5 +1,5 @@
 `<template>
-<div class="app">
+<div class="app" :style="{ backgroundColor: backgroundColor }">
   <Countdown v-if="begin"
       class="countdown"
       title=""
@@ -17,19 +17,42 @@
     <a-button @click="b(1800)" v-bind:class="bb">30min</a-button>
     <a-button @click="b(2700)" v-bind:class="bb">45min</a-button>
     <a-button @click="b(3600)" v-bind:class="bb">60min</a-button>
-
   </div>
   <a-button  id="begin-button" @click="beginCount">开始</a-button>
+
+    <div class="color">
+ <div class="co">
+   <div class="c1" @click="changeBack('white')"
+        >
+   </div>
+   <div class="c2" @click="changeBack('#deecf9')"
+        >
+   </div>
+   <div class="c3" @click="changeBack('#c7e0f4')"
+         >
+   </div>
+   <div class="c4" @click="changeBack('#e1dfdd')"
+       >
+   </div>
+   <div class="c5" @click="changeBack('#ffadd2')"
+       >
+   </div>
+ </div>
+    </div>
+
+
 </div>
 </template>
 
 <script lang="ts" setup>
 import Countdown from "../../components/Countdown.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import Hover from "../../components/Hover.vue";
 let bb = ref('b')
 let time = ref(0)
+
 function onFinish () {
- alert("123123123")
+
 }
 let begin = ref(false);
 let beginCount = () => {
@@ -38,6 +61,17 @@ let beginCount = () => {
 let b = (num:number)=>{
    time.value=num;
 }
+
+const backgroundColor = ref('white')
+
+onMounted(()=>{
+  if(localStorage.getItem('bg')!='')
+  backgroundColor.value=localStorage.getItem('bg')
+})
+const changeBack = (a:string) =>{
+  backgroundColor.value =a;
+  localStorage.setItem('bg',a);
+}
 </script>
 
 <style scoped>
@@ -45,7 +79,86 @@ let b = (num:number)=>{
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: 100%;
+}
+.co{
+  display: flex;
+  margin-left: 2vw;
+  height: 100%;
+  width: 20%;
+}
+.c1{
+  width: 11%;
+  border: black solid 1px;
+  border-radius: 100px;
+  height: 80%;
+  margin: 1vh;
+  background-color: white;
+
+}
+.c1:hover{
+  transition: all 0.5s;
+  border: aliceblue solid 1px;
+  transform:translate(0,-5px);
+}
+.c2:hover{
+  transition: all 0.5s;
+  border: aliceblue solid 1px;
+  transform:translate(0,-5px);
+}
+.c3:hover{
+  transition: all 0.5s;
+  border: aliceblue solid 1px;
+  transform:translate(0,-5px);
+
+}
+.c4:hover{
+  transition: all 0.5s;
+  border: aliceblue solid 1px;
+  transform:translate(0,-5px);
+
+}
+.c5:hover{
+  transition: all 0.5s;
+  border: aliceblue solid 1px;
+  transform:translate(0,-5px);
+
+}
+.c2{
+  width: 11%;
+  border: black solid 1px;
+  border-radius: 50px;
+  height: 85%;
+  margin: 1vh;
+  background-color: #deecf9;
+
+}
+.c3{
+  width: 11%;
+  border: black solid 1px;
+  border-radius: 50px;
+  height: 85%;
+  margin: 1vh;
+  background-color: #c7e0f4;
+
+}
+.c4{
+  width: 11%;
+  border: black solid 1px;
+  border-radius: 50px;
+  height: 85%;
+  margin: 1vh;
+  background-color: #e1dfdd;
+
+}
+.c5{
+  width: 11%;
+  border: black solid 1px;
+  border-radius: 50px;
+  height: 85%;
+  margin: 1vh;
+  background-color: #ffadd2;
+
 }
 #begin-button{
   border: orangered solid 2px;
@@ -66,8 +179,6 @@ let b = (num:number)=>{
 
 }
 .button{
-
-
   margin-top: 2%;
 }
 .b{
@@ -92,5 +203,11 @@ let b = (num:number)=>{
   font-size: 200px;
   font-size: 10vh;
   line-height: 1.5;
+}
+.color{
+  margin-top: 5%;
+  height: 5%;
+  width: 100%;
+  left: 0;
 }
 </style>

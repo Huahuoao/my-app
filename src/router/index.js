@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from "vue-router";
+import {createRouter, createWebHashHistory} from "vue-router";
 
 const routes = [
     {
@@ -30,8 +30,12 @@ const routes = [
                         component:()=>import('../views/plan/today.vue')
                     },
                     {
-                        path: "/plan/history",
+                        path:  "/plan/history",
                         component:()=>import('../views/plan/history.vue')
+                    },
+                    {
+                        path: "/plan/book",
+                        component:()=>import('../views/plan/planbook.vue')
                     },
                 ]
             },
@@ -42,7 +46,7 @@ const routes = [
 
 ]
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
 
 })
